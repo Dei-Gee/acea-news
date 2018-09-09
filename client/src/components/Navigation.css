@@ -1,0 +1,36 @@
+.navbar
+{
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 3%;
+}
+
+.navlinks
+{
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: center;
+}
+
+.links
+{
+    margin: 0 auto;
+    margin-left: 7%;
+    margin-right: 7%;
+    color: #333367;
+    text-align: center;
+    font-weight: bolder;
+    padding-bottom: 5px;
+    border-bottom: solid 2px #333367;
+    text-decoration: none;
+    transition: 300ms;
+}
+
+.links:hover
+{
+    transition: 300ms;
+    transform: translateX(25px);
+    border-bottom: solid 2px rgb(204, 0, 0);
+    color: rgb(204, 0, 0);
+}

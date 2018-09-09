@@ -1,0 +1,92 @@
+.content-wrapper
+{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.left
+{
+    width: 70%;
+    height: 100%;
+}
+
+.right
+{
+    width: 25%;
+    height: 100%;
+}
+
+.home-top, .home-top>h3
+{
+    margin-top: 0;
+}
+
+.bottom
+{
+    margin-top: 20%;
+}
+
+.feed
+{
+    width: 100%;
+    display: block;
+}
+
+.news-item
+{
+    border-top: 2px solid #333367;
+}
+
+.origin
+{
+    font-family: smaller;
+    color: #666;
+}
+
+
+.item-title
+{
+    margin-top: 2%;
+    font-size: medium;
+}
+
+
+.faq-info
+{
+    width: 90%;
+    height: 100%;
+}
+
+.title
+{
+   font-weight: bolder;
+   font-size: larger;
+}
+
+.EachQuestion
+{
+    margin-top: 4%;
+}
+
+.Question
+{
+    color: red;
+    font-weight: bold;
+}
+
+.Answer
+{
+    margin-top: 2%;
+    position: relative;
+    left: 21px;
+    width: 90%;
+}
+
+.rule
+{
+    border-bottom: red solid 2px;
+    padding-bottom: 5px;
+}

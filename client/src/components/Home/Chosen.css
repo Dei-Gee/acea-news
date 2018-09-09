@@ -1,0 +1,49 @@
+.story-div
+{
+    width: 75%;
+    height: auto;
+}
+
+.story-title
+{
+    display: block;
+}
+
+.location-span
+{
+    margin-top: 2%;
+    font-size: smaller;
+    color: #666;
+    font-style: italic;
+}
+
+.story-body
+{
+    white-space: pre-line;
+    margin-top: 4%;
+}
+
+.story-body > img
+{
+    width: 100%;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    height: 35%;
+    margin-bottom: 10%;
+}
+
+.navLink
+{
+    text-decoration: none;
+    color: #333367;
+    font-family: arial;
+    transition: 300ms;
+    cursor: pointer;
+}
+
+.navLink:hover .origin + .item-title
+{
+    transition: 300ms;
+    transform: translateX(10px);
+}

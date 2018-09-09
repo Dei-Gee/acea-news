@@ -1,0 +1,116 @@
+.content-wrapper
+{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.left
+{
+    width: 72%;
+    height: 100%;
+}
+
+.right
+{
+    width: 25%;
+    height: 100%;
+}
+
+.right > form > div > table
+{
+    width: 80%;
+    float: right;
+}
+
+.inputBoxes
+{
+    border: 2px solid black;
+    padding: 5px;
+    width: 100%;
+    font-size: medium;
+}
+
+.textArea
+{
+    border: 2px solid black;
+    padding: 5px;
+    width: 100%;
+    font-size: medium;
+    resize: none;
+}
+
+.form-wrapper
+{
+    width: 100%;
+}
+
+.admin-form
+{
+    width: 100%;
+}
+
+tbody > tr:nth-child(3) > td:nth-child(1)
+{
+    width: 14%;
+    padding: .5%;
+}
+
+
+tr, td
+{
+    padding: 1%;
+}
+
+.selectLocation
+{
+    border: 2px solid black;
+    padding: 5px;
+    width: 100%;
+    font-size: medium;
+}
+
+.submitBTN
+{
+    border: 2px solid #333367;
+    padding: 5px;
+    width: 35%;
+    font-size: medium;
+    background-color: #333367;
+    color: white;
+    cursor: pointer;
+    transition: 500ms;
+    float: left;
+}
+
+.submitBTN:hover
+{
+    transition: 500ms;
+    box-shadow: 3px 3px 5px gray;
+    color: white;
+}
+
+.resetBTN
+{
+    border: 2px solid #333367;
+    padding: 5px;
+    width: 35%;
+    font-size: medium;
+    background-color: #333367;
+    color: white;
+    cursor: pointer;
+    transition: 500ms;
+    float: right;
+}
+
+.resetBTN:hover
+{
+    transition: 500ms;
+    box-shadow: 3px 3px 5px gray;
+    color: white;
+}
+
+
+

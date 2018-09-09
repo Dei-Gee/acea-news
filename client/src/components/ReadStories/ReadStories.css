@@ -1,0 +1,26 @@
+
+
+#page-numbers {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    color: #333367;
+    font-weight: bold;
+  }
+  
+  #page-numbers > li {
+    margin-right: 0.3em;
+    color: #333367;
+    user-select: none;
+    cursor: pointer;
+    font-size: large;
+    transition: 300ms;
+    font-weight: normal;
+  }
+
+  #page-numbers > li:hover
+  {
+      transition: 300ms;
+      color: red;
+  }

@@ -1,0 +1,297 @@
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.content-wrapper
+{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.left
+{
+    width: 72%;
+    height: 100%;
+}
+
+.right
+{
+    width: 25%;
+    height: 100%;
+}
+
+.home-top, .home-top>h3
+{
+    margin-top: 0;
+}
+
+.bottom
+{
+    margin-top: 20%;
+}
+
+.feed
+{
+    width: 100%;
+    display: block;
+}
+
+.news-item
+{
+    border-top: 2px solid #333367;
+}
+
+.origin
+{
+    font-size: smaller;
+    color: #666;
+}
+
+.item-title
+{
+    margin-top: 2%;
+    font-size: medium;
+    transition: 300ms;
+}
+
+
+.breakingNews , .aceaNews
+{
+    height: 20%;
+    width: 90%;
+}
+
+.aceaNews
+{
+    margin-top: 0%;
+}
+
+.headlineSlideShow
+{
+    width: 100%;
+    height: 38vw;
+    position: relative;
+    color: white;
+    box-shadow: 0px 0px 20px gray;
+    overflow: hidden;
+}
+
+.featured-story
+{
+    text-align: center;
+    background-color: rgb(204, 0, 0);
+    width: 40%;
+    height: 5%;
+    z-index: 1;
+    padding: 5px;
+    margin-top: 3%;
+    position: absolute;
+}
+
+.featured-story > span
+{
+    margin: 0 auto;
+    color:white;
+    margin-top: 3%;
+    font-size: larger;
+    padding: 5px;
+}
+
+.news-img
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background-color: gray;
+}
+
+.news-img .each-slide
+{
+    position: relative; 
+    width: 100%;
+    height: 100%;   
+}
+
+.news-img .each-slide > img
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: gray;
+}
+
+.text-div
+{
+    position: absolute;
+    bottom: 0;
+    z-index: 3;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.874) 0%, rgba(0, 0, 0, 0.451) 70%);
+    padding: 25px;
+}
+
+.text-title
+{
+    font-size: 3.2vh;
+    font-family: arial;
+    width: 95%;
+}
+
+.text-desc
+{
+    font-size: 2.3vh;
+    font-family: arial;
+    display: none;
+}
+
+.homeNavLink
+{
+    color: white;
+    text-decoration: none;
+    transition: 300ms;
+}
+
+.homeNavLink:hover
+{
+    color: #ccc;
+    transition: 300ms;
+}
+
+.otherNews
+{
+    width: 100%;
+    height: 20%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: row;
+}
+
+.otherNews:nth-child(1)
+{
+    margin-top: 10%;
+}
+
+.otherNewsImg
+{
+    width: 30%;
+    height: 100%;
+}
+
+.otherNewsImg img
+{
+    height: 100%;
+    width: 100%;
+}
+
+.otherNewsText
+{
+    width: 80%;
+    height: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    box-sizing: content-box;
+    position: relative;
+    margin-bottom: 3%;
+}
+
+.other-title
+{
+    margin-top: 0;
+}
+
+.other_text
+{
+    padding: 0;
+    margin: 0;
+    font-size: 1.9vh;
+    top: 2%;
+    bottom: 3%;
+    height: 80px;
+    overflow: hidden;
+    white-space: pre-line;
+}
+
+.linktofull
+{
+    float: right;
+    margin-top: 1%;
+    font-size: 1.9vh;
+    font-family: 'Arial, Tahoma, Geneva, Verdana, sans-serif';
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 400; 
+    line-height: 23px;
+    height: 70px;
+    margin-bottom: 1%;
+    overflow: hidden;
+}
+
+.otherNewsText a
+{
+    position: relative;
+    top: 0px;
+}
+
+.otherNewsText span:nth-child(3)
+{
+    margin-bottom: 1%;
+    width: 100%;
+    display: block;
+}
+
+.otherNewsText a > span
+{
+    font-weight: 900;
+    color: red;
+    font-size: 1.6vh;
+}
+
+.circles
+{
+    width: 13%;
+    height: auto;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+}
+
+.badge
+{
+    height: 1vh;
+    width: 1vh;
+    border-radius: 50%;
+    border: white 2px solid;
+    margin: 0 auto;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.hiddenLocation
+{
+    display:none;
+}
+
+.navLink
+{
+    text-decoration: none;
+    color: #333367;
+    font-family: arial;
+    transition: 300ms;
+    cursor: pointer;
+}
+
+.navLink:hover .origin + .item-title
+{
+    transition: 300ms;
+    transform: translateX(10px);
+}
