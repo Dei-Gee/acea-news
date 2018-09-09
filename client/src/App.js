@@ -7,7 +7,7 @@ import './App.css';
 import About from './components/About/About';
 import Admin from './components/Admin/Admin';
 import Contact from './components/Contact/Contact';
-import Chosen from './components/Home/Chosen';
+import Chosen from './components/Home/chosen';
 import FAQ from './components/FAQ/FAQ';
 import ReadStories from './components/ReadStories/ReadStories';
 import ErrorPage from './components/Error/Error';
