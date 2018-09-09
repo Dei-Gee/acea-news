@@ -3,14 +3,16 @@ import { GET_STORIES, POST_STORY, DELETE_STORY, STORIES_LOADING} from './types';
 
 export const getStories = () => dispatch => {
     dispatch(setStoriesLoading()); 
-    axios
+    try{axios
         .get('/api/stories')
         .then(res => 
             dispatch({
                 type: GET_STORIES, 
                 payload: res.data
             })
-        )
+        )}catch (err) {
+            console.error(`Error received from axios.post: ${JSON.stringify(err)}`);
+          }
 };
 
 export const deleteStory = (id) => {

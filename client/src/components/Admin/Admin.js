@@ -2,50 +2,17 @@ import React, { Component } from 'react';
 import './Admin.css';
 import { connect } from 'react-redux';
 import { getStories, deleteStory, postStory } from '../../actions/storyActions';
-//import propTypes from 'prop-types';
-//import jsonQuery from 'json-query';
-import axios from 'axios';
+import propTypes from 'prop-types';
+import jsonQuery from 'json-query';
 //import CreationForm from './create/createForm';
 
 
 
 class Admin extends Component {
-  constructor(props){
-      super(props);
-      this.state = {
-        query: '',
-        results: []
-      }
-  }
-
-  
- componentDidMount()
+  componentDidMount()
   {
-    //this.props.getStories();
+    this.props.getStories();
   }  
-  getInfo = () => {
-    axios.get(`${'/api/stories'}&prefix=${this.props.query}&limit=7`)
-      .then((res) => {
-        this.setState({
-          results: res.data
-        })
-      })
-  }
-  
-
-  handleInputChange = () => {
-    this.setState({
-      query: this.search.value
-    }, () => {
-      if (this.props.query && this.props.query.length > 1) {
-        if (this.props.query.length % 2 === 0) {
-          this.getInfo()
-        }
-      } 
-    })
-  }
-
-  
 
   onDeleteClick = id => {
     this.props.deleteStory(id);
@@ -78,14 +45,16 @@ class Admin extends Component {
     alert('New Story Posted!');
   }
 
+  
 
     render(){
-        //const { stories } = this.props.story; 
-        //const storiesArr = Object.keys(stories);
+        const { stories } = this.props.story; 
+        const storiesArr = Object.keys(stories);
 
-        //const Title = jsonQuery('[*][Title]', {data: stories} ).value;
+        const Title = jsonQuery('[*][Title]', {data: stories} ).value;
 
 
+        
 
         const postNewStory = () => {
             return(
@@ -185,13 +154,7 @@ class Admin extends Component {
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <input type="Search" ref={input => this.search = input} onChange={this.handleInputChange} className="inputBoxes" name="Search"  placeholder="Search..." />
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            {this.props.query}
+                                            <input type="Search" onSubmit={this.onSearch} className="inputBoxes" name="Search"  placeholder="Search..." />
                                         </td>
                                     </tr>
                                 </tbody>
