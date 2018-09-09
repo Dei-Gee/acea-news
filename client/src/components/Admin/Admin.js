@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './Admin.css';
 import { connect } from 'react-redux';
 import { getStories, deleteStory, postStory } from '../../actions/storyActions';
-import propTypes from 'prop-types';
-import jsonQuery from 'json-query';
+//import propTypes from 'prop-types';
+//import jsonQuery from 'json-query';
 //import CreationForm from './create/createForm';
 
 
@@ -48,10 +48,10 @@ class Admin extends Component {
   
 
     render(){
-        const { stories } = this.props.story; 
-        const storiesArr = Object.keys(stories);
+        //const { stories } = this.props.story; 
+        //const storiesArr = Object.keys(stories);
 
-        const Title = jsonQuery('[*][Title]', {data: stories} ).value;
+        //const Title = jsonQuery('[*][Title]', {data: stories} ).value;
 
 
         
