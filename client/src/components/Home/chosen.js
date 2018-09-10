@@ -61,7 +61,7 @@ class Chosen extends Component{
                 <div className="left">
                     <div className="story-div">
                         <h3 className="story-title">{this.props.story.storytitle}</h3>
-                        <span className="location-span">Canada - {this.props.story.location}</span>
+                        <span className="location-span">Canada - {this.props.story.location} | {this.props.story.storydate}</span>
                         <p className="story-body">
                             <img alt="nitpix" src={this.props.story.storyimage} />
                             {this.props.story.storybody}

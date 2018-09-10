@@ -7,6 +7,7 @@ const initialState = {
     storybody: '', 
     location: '', 
     storyimage: '', 
+    storydate: '', 
     currentPage: '', 
     storiesPerPage: 4, 
     query: '', 

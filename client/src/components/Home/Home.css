@@ -215,9 +215,14 @@ h1, h2, h3, h4, h5, h6
     font-size: 1.9vh;
     top: 2%;
     bottom: 3%;
-    height: 80px;
+    height: 75px;
     overflow: hidden;
     white-space: pre-line;
+}
+
+.other_text_hidden
+{
+    display: none;
 }
 
 .linktofull

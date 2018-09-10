@@ -23,6 +23,7 @@ class Home extends Component {
     let ref2 = "storybody" + e.target.id;
     let ref3 = "storylocation" + e.target.id;
     let ref4 = "storyimage" + e.target.id;
+    let ref5 = "storydate" + e.target.id
 
     console.log(ref1);
     console.log(e.target.getAttribute('id'));
@@ -30,6 +31,7 @@ class Home extends Component {
     this.props.story.storybody = this.refs[ref2].textContent;
     this.props.story.location = this.refs[ref3].textContent;
     this.props.story.storyimage = this.refs[ref4].src;
+    this.props.story.storydate = this.refs[ref5].textContent
   }
 
   
@@ -124,6 +126,35 @@ class Home extends Component {
       
     });
 
+    const formerFeatured = stories.map((eachStory, index) => {
+      let i = index + 4
+      if(i < 7 && i > 3)
+      {
+        return(
+          <div className="otherNews" key={i}>
+            <div className="otherNewsImg">
+              <img alt="pix" ref={`storyimage${i}`} src={eachStory.ImageURL} />
+            </div>
+
+            <div className="otherNewsText">
+                <h3 className="other-title" ref={`storytitle${i}`}>{eachStory.Title}</h3>
+                <div className="hiddenLocation" ref={`storylocation${i}`}>{eachStory.Location}</div>
+                <div className="hiddenLocation" ref={`storydate${i}`}>{eachStory.DateCreated}</div>
+                <p className="other_text">
+                  {eachStory.Content.split('.').splice(0,2)}
+                </p>
+
+                <p className="other_text_hidden" ref={`storybody${i}`}>
+                  {eachStory.Content}
+                </p>
+                
+                <p className="linktofull"><NavLink to="/story" id={i} onClick={this.handleClick}>Read Full Story <span> > </span> </NavLink></p>
+            </div>
+          </div>
+        );
+      }
+    })
+
     
     return(
       
@@ -139,59 +170,11 @@ class Home extends Component {
                 { Slideshow() }
               </div>
 
-                
-              
-             </div>
-
-            <div className="otherNews">
-              <div className="otherNewsImg">
-                <img alt="pix" ref="storyimage4" src={ImageURL[storiesArr.length - 4]} />
-              </div>
-
-              <div className="otherNewsText">
-                  <h3 className="other-title" ref="storytitle4">{Title[storiesArr.length - 4]}</h3>
-                  <span className="hiddenLocation" ref="storylocation4">{location[storiesArr.length - 4]}</span>
-                  <p className="other_text" ref="storybody4">
-                    {Content[storiesArr.length - 4]}
-                  </p>
-                  
-                  <p className="linktofull"><NavLink to="/story" id="4" onClick={this.handleClick}>Read Full Story <span> > </span> </NavLink></p>
-              </div>
             </div>
 
-            <div className="otherNews">
-              <div className="otherNewsImg">
-                <img alt="pix" ref="storyimage5" src={ImageURL[storiesArr.length - 5]} />
-              </div>
+            { formerFeatured }
 
-              <div className="otherNewsText">
-                  <h3 className="other-title" ref="storytitle5">{Title[storiesArr.length - 5]}</h3>
-                  <span className="hiddenLocation" ref="storylocation5">{location[storiesArr.length - 5]}</span>
-                  <p className="other_text" ref="storybody5">
-                    {Content[storiesArr.length - 5]}
-                  </p>
-                  
-                  
-                  <p className="linktofull"><NavLink to="/story" id="5" onClick={this.handleClick}>Read Full Story <span> > </span> </NavLink></p>
-              </div>
-            </div>
-
-            <div className="otherNews">
-              <div className="otherNewsImg">
-                <img alt="pix" ref="storyimage6" src={ImageURL[storiesArr.length - 6]} />
-              </div>
-
-              <div className="otherNewsText">
-                  <h3 className="other-title" ref="storytitle6">{Title[storiesArr.length - 6]}</h3>
-                  <span className="hiddenLocation" ref="storylocation6">{location[storiesArr.length - 6]}</span>
-                  <p className="other_text" ref="storybody6">
-                    {Content[storiesArr.length - 6]}
-                  </p>
-                  
-                  
-                  <p className="linktofull"><NavLink to="/story" id="6" onClick={this.handleClick}>Read Full Story <span> > </span> </NavLink></p>
-              </div>
-            </div>
+            
           </div>
 
           <div className="stories">
