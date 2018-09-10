@@ -1,4 +1,4 @@
-import { GET_STORIES, POST_STORY, DELETE_STORY, STORIES_LOADING} from '../actions/types';
+import { GET_STORIES, GET_RESULTS, POST_STORY, DELETE_STORY, STORIES_LOADING} from '../actions/types';
 
 const initialState = {
     stories: [], 
@@ -7,8 +7,10 @@ const initialState = {
     storybody: '', 
     location: '', 
     storyimage: '', 
-    currentPage: '1', 
-    storiesPerPage:'4'
+    currentPage: '', 
+    storiesPerPage: 4, 
+    query: '', 
+    queryResults: []
 };
 
 export default function(state = initialState, action)
@@ -20,6 +22,14 @@ export default function(state = initialState, action)
             return {
                 ...state, 
                 stories: action.payload,
+                loading: false
+            }
+
+        case GET_RESULTS:
+            
+            return {
+                ...state, 
+                queryResults: action.payload,
                 loading: false
             }
 

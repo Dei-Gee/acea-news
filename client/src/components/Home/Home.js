@@ -19,18 +19,17 @@ class Home extends Component {
 
 
   handleClick = (e) => {
-    //e.preventDefault()
-    let ref1 = "storytitle" + e.target.id
-    let ref2 = "storybody" + e.target.id
-    let ref3 = "storylocation" + e.target.id
+    let ref1 = "storytitle" + e.target.id;
+    let ref2 = "storybody" + e.target.id;
+    let ref3 = "storylocation" + e.target.id;
+    let ref4 = "storyimage" + e.target.id;
 
-    console.log(ref1)
-    console.log(e.target.getAttribute('id'))
-    this.props.story.storytitle = this.refs[ref1].textContent
-    this.props.story.storybody = this.refs[ref2].textContent
-    this.props.story.location = this.refs[ref3].textContent
-    //alert(this.props.story.storytitle)
-    //alert(this.props.story.storybody)
+    console.log(ref1);
+    console.log(e.target.getAttribute('id'));
+    this.props.story.storytitle = this.refs[ref1].textContent;
+    this.props.story.storybody = this.refs[ref2].textContent;
+    this.props.story.location = this.refs[ref3].textContent;
+    this.props.story.storyimage = this.refs[ref4].src;
   }
 
   
@@ -146,7 +145,7 @@ class Home extends Component {
 
             <div className="otherNews">
               <div className="otherNewsImg">
-                <img alt="pix"ref="storyimage4" src={ImageURL[storiesArr.length - 4]} />
+                <img alt="pix" ref="storyimage4" src={ImageURL[storiesArr.length - 4]} />
               </div>
 
               <div className="otherNewsText">

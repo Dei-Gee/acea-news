@@ -5,52 +5,53 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getStories } from '../../actions/storyActions';
 import propTypes from 'prop-types';
-import jsonQuery from 'json-query';
+//import jsonQuery from 'json-query';
 
 class ReadStories extends Component{
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.handlePageClick = this.handlePageClick.bind(this);
+        this.props.story.currentPage = 1;
+        this.changePage = this.changePage.bind(this);
     }
+    
 
     componentDidMount(){
         this.props.getStories();
     }
 
-    handlePageClick(e) {
-        const linkColor = {
-            color: 'red'
-        }
-        this.props.story.currentPage = Number(e.target.id)
-        e.target.style = linkColor
-      }
+    
 
     handleClick = (e) => {
-        //e.preventDefault()
-        let ref1 = "storytitle" + e.target.id
-        let ref2 = "storybody" + e.target.id
-        let ref3 = "storylocation" + e.target.id
-        let ref4 = "storyimage" + e.target.id
+        //e.preventDefault();
+        let ref1 = "storytitle" + e.target.id;
+        let ref2 = "storybody" + e.target.id;
+        let ref3 = "storylocation" + e.target.id;
+        let ref4 = "storyimage" + e.target.id;
     
-        console.log(ref1)
-        console.log(e.target.getAttribute('id'))
-        this.props.story.storytitle = this.refs[ref1].textContent
-        this.props.story.storybody = this.refs[ref2].textContent
-        this.props.story.location = this.refs[ref3].textContent
-        this.props.story.storyimage = this.refs[ref4].src
+        console.log(ref1);
+        console.log(e.target.getAttribute('id'));
+        this.props.story.storytitle = this.refs[ref1].textContent;
+        this.props.story.storybody = this.refs[ref2].textContent;
+        this.props.story.location = this.refs[ref3].textContent;
+        this.props.story.storyimage = this.refs[ref4].src;
       }
 
-      
+    changePage = (e) => {
+        this.props.story.currentPage = parseInt(e.target.id, 10);
+        console.log(this.props.story.currentPage);
+    }
 
     render(){
 
-        const { stories, currentPage, storiesPerPage } = this.props.story;
+        const { stories } = this.props.story;
+        const currentPage = this.props.story.currentPage;
+        const storiesPerPage = this.props.story.storiesPerPage;
         const storiesArr = Object.keys(stories);
 
-        const Title = jsonQuery('[*][Title]', {data: stories} ).value;
-        const Content = jsonQuery('[*][Content]', {data: stories} ).value;
-        const ImageURL = jsonQuery('[*][ImageURL]', {data: stories} ).value;
-        const location = jsonQuery('[*][Location]', {data: stories} ).value;
+        //const Title = jsonQuery('[*][Title]', {data: stories} ).value;
+        //const Content = jsonQuery('[*][Content]', {data: stories} ).value;
+        //const ImageURL = jsonQuery('[*][ImageURL]', {data: stories} ).value;
+        //const location = jsonQuery('[*][Location]', {data: stories} ).value;
 
         
         
@@ -60,20 +61,19 @@ class ReadStories extends Component{
 
         // Logic for displaying page numbers
         const pageNumbers = [];
-        
         const fillPageNumbers = () => {
             for (let i = 1; i <= Math.ceil(storiesArr.length / storiesPerPage); i++) 
             {
                 pageNumbers.push(i)
             }
         }
-                console.log(pageNumbers)
+                
 
         fillPageNumbers();
 
         const renderPageNumbers = pageNumbers.map(number => {
             return (
-              <li key={number} id={number} style={this.blackColor} onClick={this.handlePageClick}>
+              <li key={number} id={number} onClick={this.changePage}>
                 Page {number} |
               </li>
             );
@@ -84,14 +84,14 @@ class ReadStories extends Component{
             return(
                 <div className="otherNews" key={i}>
                     <div className="otherNewsImg">
-                        <img alt="pix" ref={`storyimage${i}`} src={ImageURL[storiesArr.length - i]} />
+                        <img alt="pix" ref={`storyimage${i}`} src={eachStory.ImageURL} />
                     </div>
 
                     <div className="otherNewsText">
-                        <h3 className="other-title" ref={`storytitle${i}`}>{Title[storiesArr.length - i]}</h3>
-                        <span className="hiddenLocation" ref={`storylocation${i}`}>{location[storiesArr.length - i]}</span>
+                        <h3 className="other-title" ref={`storytitle${i}`}>{eachStory.Title}</h3>
+                        <span className="hiddenLocation" ref={`storylocation${i}`}>{eachStory.location}</span>
                         <p className="other_text" ref={`storybody${i}`}>
-                            {Content[storiesArr.length - i]}
+                            {eachStory.Content}
                         </p>
                         
                         <p className="linktofull"><NavLink to="/story" id={i} onClick={this.handleClick}>Read Full Story <span> > </span> </NavLink></p>

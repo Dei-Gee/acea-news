@@ -5,10 +5,24 @@ import { getStories, deleteStory, postStory } from '../../actions/storyActions';
 //import propTypes from 'prop-types';
 //import jsonQuery from 'json-query';
 //import CreationForm from './create/createForm';
+import axios from 'axios';
+import { GET_RESULTS } from '../../actions/types';
+
+const { API_KEY } = process.env || 5000
+const API_URL = '/api/stories'
+
 
 
 
 class Admin extends Component {
+    constructor(props) {
+        super(props);
+        this.props.story.query = '';
+        this.props.story.queryResults = [];
+    }
+    
+
+
   componentDidMount()
   {
     this.props.getStories();
@@ -45,15 +59,43 @@ class Admin extends Component {
     alert('New Story Posted!');
   }
 
+    
+  getSearchResults = () => dispatch => {
+    axios.get(`${API_URL}?api_key=${API_KEY}&prefix=${this.props.story.query}&limit=7`)
+      .then(res =>  
+      dispatch({
+          type: GET_RESULTS, 
+          payload: res.data
+      })
+    )
+  };
   
 
+  onSearch = () => {
+    this.props.story.query = this.search.value;
+    
+    if (this.props.story.query && this.props.story.query.length > 1) {
+      if (this.props.story.query.length % 2 === 0) {
+        this.getSearchResults();
+      }else{
+
+      }
+    } else if (!this.props.story.query) 
+    {
+
+    }
+  }
+
     render(){
-        //const { stories } = this.props.story; 
-        //const storiesArr = Object.keys(stories);
+        const { stories } = this.props.story; 
+        const storiesArr = Object.keys(stories);
 
         //const Title = jsonQuery('[*][Title]', {data: stories} ).value;
-
-
+        //const {queryResultsArr} = Object.keys(stories)
+        
+        const Suggestions = storiesArr.map((eachResult, i) => {
+            return(<li key={i}>{eachResult.Title}</li>);
+        })
         
 
         const postNewStory = () => {
@@ -154,7 +196,15 @@ class Admin extends Component {
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <input type="Search" onSubmit={this.onSearch} className="inputBoxes" name="Search"  placeholder="Search..." />
+                                            <input type="Search" onChange={this.onSearch} ref={input => this.search = input} className="inputBoxes" name="Search"  placeholder="Search..." />
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <ul>
+                                                { Suggestions }
+                                            </ul>
                                         </td>
                                     </tr>
                                 </tbody>

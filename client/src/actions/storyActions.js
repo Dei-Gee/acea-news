@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { GET_STORIES, POST_STORY, DELETE_STORY, STORIES_LOADING} from './types';
+import { GET_STORIES, GET_RESULTS, POST_STORY, DELETE_STORY, STORIES_LOADING} from './types';
+
+
 
 export const getStories = () => dispatch => {
     dispatch(setStoriesLoading()); 
