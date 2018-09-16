@@ -8,8 +8,8 @@ const initialState = {
     location: '', 
     storyimage: '', 
     storydate: '', 
-    currentPage: '', 
-    storiesPerPage: 4, 
+    currentPage: 1, 
+    storiesPerPage: 2, 
     query: '', 
     queryResults: []
 };
@@ -25,7 +25,16 @@ export default function(state = initialState, action)
                 stories: action.payload,
                 loading: false
             }
-
+            
+        case GET_RESULTS:
+            
+            return {
+                ...state, 
+                query: '',  
+                queryResults: action.payload,
+                loading: false
+            }
+            
         case GET_RESULTS:
             
             return {

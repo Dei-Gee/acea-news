@@ -1,83 +1,13 @@
 import React, { Component } from 'react';
-import './Admin.css';
 import { connect } from 'react-redux';
-import { getStories, getResults, deleteStory, postStory } from '../../actions/storyActions';
+import { postStory } from '../../../actions/storyActions';
 import propTypes from 'prop-types';
-import jsonQuery from 'json-query';
-import axios from 'axios';
-//import Search from './Search/Search';
-//import CreationForm from './create/createForm';
 
 
-
-class Admin extends Component {
-    
-    
-
-  componentDidMount()
-  {
-    //this.props.getStories();
-    this.props.getResults();
-  }  
-
-  onDeleteClick = id => {
-    this.props.deleteStory(id);
-  }
-  
-  
-  onChange = (e) => {
-      this.setState({ [e.target.name]: e.target.value });
-  }
-  
-
- 
-  selectionChanged = (e) => {
-      this.setState({selectedValue: e.target.value});
-  }
-
-  onSubmit = (e) => {
-    e.preventDefault();
-
-    const newStory = {
-        Title: this.state.Title, 
-        Content: this.state.Content,
-        ImageURL: this.state.ImageURL, 
-        Location: this.state.Location, 
-        DateCreated: this.state.DateCreated
-    }
-
-    this.props.postStory(newStory);
-    document.getElementById('admin-form').reset();
-    alert('New Story Posted!');
-  }
-
-    onSearch = (e) =>{
-        
-        this.props.story.query = e.target.value;
-        console.log(e.target.value);
-        console.log(this.props.story.query);
-        
-
-        if (this.props.story.query && this.props.story.query.length > 1) {
-            if (this.props.story.query % 2 === 0) {
-                this.props.getResults(this.props.story.query)
-            }
-        } 
-    }
-  
-
+class Search extends Component{
     render(){
-        const { stories } = this.props.story; 
-        //const storiesArr = Object.keys(stories);
-
-        const Title = jsonQuery('[*][Title]', {data: stories} ).value;
-
-
-        
-
-        const postNewStory = () => {
-            return(
-                <form className="admin-form" id="admin-form" onSubmit={this.onSubmit} method="POST">
+        return(
+            <form className="admin-form" id="admin-form" onSubmit={this.onSubmit} method="POST">
                 <table>
                     <thead colSpan="2">
                         <tr>
@@ -147,58 +77,11 @@ class Admin extends Component {
                     </tbody>
                 </table>
             </form>
-            );
-        }
-
-        
-  
-
-        return(
-            <div className="content-wrapper">
-                <div className="left">
-                    <div className="form-wrapper">
-                        { postNewStory() }
-
-                        <div className="navBTNs">
-                            <button className="BTNs" id="Ne" onClick={this.openForm}> Post a new story</button>
-                            <div className="form-container" id="form1">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="right">
-                    <form>
-                        <div className="form-wrapper">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <td>
-                                            <h2>Find Posts</h2>
-                                        </td>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="Search" onChange={this.onSearch} className="inputBoxes" name="Search"  placeholder="Search..." />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </form>
-                </div>
-            </div>
         );
     }
 }
 
-
-Admin.propTypes = {
-    getStories: propTypes.func.isRequired, 
-    getResults: propTypes.func.isRequired, 
+Search.propTypes = { 
     story: propTypes.object.isRequired
   };
   
@@ -206,4 +89,4 @@ const mapStateToProps = (state) => ({
 story: state.story
 });
 
-export default connect(mapStateToProps, { getStories, getResults, deleteStory, postStory })(Admin);
+export default connect(mapStateToProps, { postStory })(Search);

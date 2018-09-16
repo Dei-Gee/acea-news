@@ -34,7 +34,7 @@ class App extends Component {
                   <Route path="/about" component={About} />
                   <Route path="/contact" component={Contact} />
                   <Route path="/faq" component={FAQ} />
-                  <Route path="/stories" component={ReadStories} />
+                  <Route path="/stories/page/:page_number" component={ReadStories} />
                   <Route path="/admin" component={Admin} />
                   <Route path="/story" component={Chosen} />
                   <Route component={ErrorPage} />              

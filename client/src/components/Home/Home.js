@@ -31,7 +31,7 @@ class Home extends Component {
     this.props.story.storybody = this.refs[ref2].textContent;
     this.props.story.location = this.refs[ref3].textContent;
     this.props.story.storyimage = this.refs[ref4].src;
-    this.props.story.storydate = this.refs[ref5].textContent
+    this.props.story.storydate = this.refs[ref5].textContent;
   }
 
   
@@ -46,6 +46,7 @@ class Home extends Component {
     const Content = jsonQuery('[*][Content]', {data: stories} ).value;
     const ImageURL = jsonQuery('[*][ImageURL]', {data: stories} ).value;
     const location = jsonQuery('[*][Location]', {data: stories} ).value;
+    const DateCreated = jsonQuery('[*][DateCreated]', {data: stories} ).value;
 
     /*updateData = (stories) => {
       this.setState({ stories });
@@ -64,11 +65,14 @@ class Home extends Component {
         <Slide {...properties}>
           
           <div className="each-slide">
-            <img alt="pix"ref="storyimage1" src={ ImageURL[storiesArr.length - 1] } />
+            <img alt="pix" ref="storyimage1" src={ ImageURL[storiesArr.length - 1] } />
+            <div className="hiddenLocation" ref="storydate1">{DateCreated[storiesArr.length - 1] }</div>
             <div className="text-div">
-              <NavLink className="homeNavLink" to="/story" id="1" onClick={this.handleClick}>
-                <h2 className="text-title" ref="storytitle1">{ Title[storiesArr.length - 1] }</h2>
-              </NavLink>
+              <h2 className="text-title" ref="storytitle1">
+                <NavLink className="homeNavLink" to="/story" id="1" onClick={this.handleClick}>
+                  { Title[storiesArr.length - 1] }
+                </NavLink>
+              </h2>
               <span className="hiddenLocation" ref="storylocation1">{location[storiesArr.length - 1]}</span>
               <p className="text-desc" ref="storybody1">
                 {Content[storiesArr.length - 1]}
@@ -76,11 +80,14 @@ class Home extends Component {
             </div>
           </div>
           <div className="each-slide">
-            <img alt="pix"ref="storyimage2" src={ImageURL[storiesArr.length - 2]} />
+            <img alt="pix" ref="storyimage2" src={ImageURL[storiesArr.length - 2]} />
+            <div className="hiddenLocation" ref="storydate2">{DateCreated[storiesArr.length - 1] }</div>
             <div className="text-div">
-              <NavLink className="homeNavLink" to="/story" id="2" onClick={this.handleClick}>
-                <h2 className="text-title">{ Title[storiesArr.length - 2] }</h2>
-              </NavLink>
+              <h2 className="text-title" ref="storytitle2">
+                <NavLink className="homeNavLink" to="/story" id="2" onClick={this.handleClick}>
+                  { Title[storiesArr.length - 2] }
+                </NavLink>
+              </h2>
               <span className="hiddenLocation" ref="storylocation2">{location[storiesArr.length - 2]}</span>
               <p className="text-desc">
               {Content[storiesArr.length - 2]}
@@ -88,11 +95,14 @@ class Home extends Component {
             </div>
           </div>
           <div className="each-slide">
-            <img alt="pix"ref="storyimage3" src={ImageURL[storiesArr.length - 3]} />
+            <img alt="pix" ref="storyimage3" src={ImageURL[storiesArr.length - 3]} />
+            <div className="hiddenLocation" ref="storydate3">{DateCreated[storiesArr.length - 1] }</div>
             <div className="text-div">
-              <NavLink className="homeNavLink" to="/story" id="3" onClick={this.handleClick}>
-                <h2 className="text-title">{ Title[storiesArr.length - 3] }</h2>
-              </NavLink>
+              <h2 className="text-title" ref="storytitle3">
+                <NavLink className="homeNavLink" to="/story" id="3" onClick={this.handleClick}>
+                  { Title[storiesArr.length - 3] }
+                </NavLink>
+              </h2>
               <span className="hiddenLocation" ref="storylocation3">{location[storiesArr.length - 3]}</span>
               <p className="text-desc">
               {Content[storiesArr.length - 3]}
@@ -110,25 +120,32 @@ class Home extends Component {
 
     feedArray.length = storiesArr.length;
 
-    const getContent = storiesArr.map((eachStory, i) => {
-      let index = i + 4
-      return(
-        <NavLink to="/story" key={i} id={index} className="navLink" onClick={this.handleClick}>
-          <div className="news-item">
-            <p className="origin">Canada-{location[i]}</p>
-            <p className="item-title" ref={`storytitle${index}`}>
-              {Title[i]}
-            </p>
-          </div>
-        </NavLink>
-        
-      );
-      
+    
+      const getContent = stories.map((eachStory, i) => {
+      let index = storiesArr.length - i;
+      if(index > 6 && index < 12)
+      {
+        return(
+          
+            <div className="news-item" key={index}>
+              <p className="origin">Canada-{eachStory.Location}</p>
+              <div className="hiddenLocation" ref={`storylocation${index}`}>{eachStory.Location}</div>
+              <div className="hiddenLocation" ref={`storydate${index}`}>{eachStory.DateCreated}</div>
+              <div className="hiddenLocation" ref={`storybody${index}`}>{eachStory.Content}</div>
+              <img alt="nitpix" className="hiddenLocation" ref={`storyimage${index}`} src={eachStory.ImageURL} />
+              <p className="item-title" ref={`storytitle${index}`}>
+                <NavLink to="/story" id={index} className="navLink" onClick={this.handleClick}>{eachStory.Title}</NavLink>
+              </p>
+            </div>
+          
+          
+        );
+      }
     });
 
     const formerFeatured = stories.map((eachStory, index) => {
-      let i = index + 4
-      if(i < 7 && i > 3)
+      let i = storiesArr.length - index
+      if(i > 3 && i < 7)
       {
         return(
           <div className="otherNews" key={i}>

@@ -5,18 +5,21 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getStories } from '../../actions/storyActions';
 import propTypes from 'prop-types';
+import Redirect from 'react-router-dom/Redirect';
 //import jsonQuery from 'json-query';
 
 class ReadStories extends Component{
     constructor(props) {
         super(props);
-        this.props.story.currentPage = 1;
-        this.changePage = this.changePage.bind(this);
+        <Redirect to={`/stories/page/1`} />
     }
+    
     
 
     componentDidMount(){
         this.props.getStories();
+        //this.props.match.params.page_number = this.props.story.currentPage;
+        
     }
 
     
@@ -27,6 +30,7 @@ class ReadStories extends Component{
         let ref2 = "storybody" + e.target.id;
         let ref3 = "storylocation" + e.target.id;
         let ref4 = "storyimage" + e.target.id;
+        let ref5 = "storydate" + e.target.id
     
         console.log(ref1);
         console.log(e.target.getAttribute('id'));
@@ -34,62 +38,93 @@ class ReadStories extends Component{
         this.props.story.storybody = this.refs[ref2].textContent;
         this.props.story.location = this.refs[ref3].textContent;
         this.props.story.storyimage = this.refs[ref4].src;
-      }
+        this.props.story.storydate = this.refs[ref5].textContent;
+    };
 
     changePage = (e) => {
-        this.props.story.currentPage = parseInt(e.target.id, 10);
-        console.log(this.props.story.currentPage);
+        //e.preventDefault();
+        let myID = e.target.id;
+    
+        //console.log(e.target.getAttribute('id'));
+        this.props.story.currentPage = myID;
+    };
+
+    toPrev = (e) => {
+        this.props.story.currentPage = this.props.story.currentPage - 1;
+    }
+
+    toNext = (e) => {
+        
+        //let leCurrentPage = parseInt(this.props.story.currentPage, 10) + 1;
+        
+        let myStoriesArr = Object.keys(this.props.story.stories);
+        let numOfPages = Math.ceil(myStoriesArr.length / this.props.story.storiesPerPage);
+        if(parseInt(this.props.story.currentPage, 10) > numOfPages)
+        {
+            console.log(this.props.story.currentPage + ' is larger than ' + numOfPages);
+            return <Redirect to={`/stories/page/${this.props.story.currentPage - 1}`} />;
+        }
+        else
+        {
+            this.props.story.currentPage = this.props.story.currentPage + 1;
+            console.log(this.props.story.currentPage + ' is smaller than ' + numOfPages);
+        }
     }
 
     render(){
 
-        const { stories } = this.props.story;
-        const currentPage = this.props.story.currentPage;
+        const { stories } = this.props.story.stories;
+        let currentPage = this.props.story.currentPage;
         const storiesPerPage = this.props.story.storiesPerPage;
-        const storiesArr = Object.keys(stories);
+        const storiesArr = Object.keys(this.props.story.stories);
+        //const numOfPages = Math.ceil(storiesArr.length / storiesPerPage);
 
-        //const Title = jsonQuery('[*][Title]', {data: stories} ).value;
-        //const Content = jsonQuery('[*][Content]', {data: stories} ).value;
-        //const ImageURL = jsonQuery('[*][ImageURL]', {data: stories} ).value;
-        //const location = jsonQuery('[*][Location]', {data: stories} ).value;
+        if(currentPage === 0)
+        {
+            this.props.story.currentPage = currentPage + 1;
+            return <Redirect to={`/stories/page/${this.props.story.currentPage}`} />;
+        }
 
+        
         
         
         const indexOfLastStories = currentPage * storiesPerPage;
         const indexOfFirstStories = indexOfLastStories - storiesPerPage;
-        const currentStories = stories.slice(indexOfFirstStories, indexOfLastStories);
+        const currentStories = this.props.story.stories.slice(indexOfFirstStories, indexOfLastStories);
 
         // Logic for displaying page numbers
         const pageNumbers = [];
         const fillPageNumbers = () => {
             for (let i = 1; i <= Math.ceil(storiesArr.length / storiesPerPage); i++) 
             {
-                pageNumbers.push(i)
+                pageNumbers.push(i);
             }
         }
                 
 
-        fillPageNumbers();
-
+        fillPageNumbers();  
         const renderPageNumbers = pageNumbers.map(number => {
             return (
-              <li key={number} id={number} onClick={this.changePage}>
-                Page {number} |
+              <li key={number}>
+                <NavLink to={`/stories/page/${number}`} id={number} className="pagelink" onClick={this.changePage}> {number} </NavLink>
               </li>
             );
           });
-
+          
         const defaultContent = currentStories.map((eachStory, index) => {
-            let i = 1 + index
+            let i = currentStories.length - ( index );
+            
             return(
                 <div className="otherNews" key={i}>
+                    
                     <div className="otherNewsImg">
                         <img alt="pix" ref={`storyimage${i}`} src={eachStory.ImageURL} />
                     </div>
 
                     <div className="otherNewsText">
                         <h3 className="other-title" ref={`storytitle${i}`}>{eachStory.Title}</h3>
-                        <span className="hiddenLocation" ref={`storylocation${i}`}>{eachStory.location}</span>
+                        <span className="hiddenLocation" ref={`storylocation${i}`}>{eachStory.Location}</span>
+                        <div className="hiddenLocation" ref={`storydate${i}`}>{eachStory.DateCreated}</div>
                         <p className="other_text" ref={`storybody${i}`}>
                             {eachStory.Content}
                         </p>
@@ -100,6 +135,31 @@ class ReadStories extends Component{
             );
         });
 
+        const prevBTN = () => {
+            let numOfPages = Math.ceil(this.props.story.stories.length / this.props.story.storiesPerPage);
+            if(this.props.story.currentPage > 1)
+            {
+                return  <li>
+                            <NavLink to={`/stories/page/${parseInt(this.props.story.currentPage, 10) - 1}`} id={parseInt(this.props.story.currentPage, 10) - 1} className="pagelink" onClick={this.toPrev}> Previous </NavLink>
+                        </li>;
+            }
+            else{
+                return  <li></li>;
+            }
+        }
+
+        const nextBTN = () => {
+            let numOfPages = Math.ceil(this.props.story.stories.length / this.props.story.storiesPerPage);
+            if(this.props.story.currentPage < numOfPages)
+            {
+                return  <li>
+                            <NavLink to={`/stories/page/${parseInt(this.props.story.currentPage, 10) + 1}`} id={parseInt(this.props.story.currentPage, 10) + 1} className="pagelink" onClick={this.toNext}> Next </NavLink>
+                        </li>;
+            }
+            else{
+                return  <li></li>;
+            }
+        }
 
 
         return(
@@ -108,7 +168,12 @@ class ReadStories extends Component{
                     { defaultContent }
                     <div>
                         <ul id="page-numbers">
+                            {prevBTN()}
+                                
                             {renderPageNumbers}
+
+                            {nextBTN()}
+                            
                         </ul>
                     </div>
                 </div>
@@ -126,7 +191,7 @@ ReadStories.propTypes = {
     story: propTypes.object.isRequired
   };
   
-  const mapStateToProps = (state) => ({
+  const mapStateToProps = (state, ownProps) => ({
     story: state.story
   });
   

@@ -17,6 +17,17 @@ export const getStories = () => dispatch => {
           }
 };
 
+export const getResults = (query) => dispatch => {
+        try{axios.get(`api/stories?api_key=process_env&prefix=${query}&limit=7`)
+            .then(res => dispatch({
+                type: GET_RESULTS, 
+                payload : res.data
+            }))}catch (err)
+            {
+                console.error(`Error received from axios.get: ${JSON.stringify(err)}`);
+            }
+};
+
 export const deleteStory = (id) => {
     return{
         type: DELETE_STORY, 
