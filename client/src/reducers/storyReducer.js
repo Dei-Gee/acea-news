@@ -38,7 +38,7 @@ export default function(state = initialState, action)
         case GET_RESULTS:
             
             return {
-                ...state, 
+                ...state.stories.filter(story => story.query == action.payload), 
                 queryResults: action.payload,
                 loading: false
             }

@@ -16,13 +16,21 @@ export const getStories = () => dispatch => {
             console.error(`Error received from axios.post: ${JSON.stringify(err)}`);
           }
 };
+/*
+dispatch({
+                type: GET_RESULTS, 
+                payload : res.data
+            })
+*/
 
 export const getResults = (query) => dispatch => {
-        try{axios.get(`api/stories?api_key=process_env&prefix=${query}&limit=7`)
+    console.log(query + ' my query');
+        try{axios.get('api/stories?Title=' + query)
             .then(res => dispatch({
                 type: GET_RESULTS, 
                 payload : res.data
-            }))}catch (err)
+            })
+            )}catch (err)
             {
                 console.error(`Error received from axios.get: ${JSON.stringify(err)}`);
             }

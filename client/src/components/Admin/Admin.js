@@ -16,8 +16,8 @@ class Admin extends Component {
 
   componentDidMount()
   {
-    //this.props.getStories();
-    this.props.getResults();
+    this.props.getStories();
+    //this.props.getResults();
   }  
 
   onDeleteClick = id => {
@@ -52,15 +52,40 @@ class Admin extends Component {
   }
 
     onSearch = (e) =>{
-        
+        e.preventDefault();
         this.props.story.query = e.target.value;
         console.log(e.target.value);
         console.log(this.props.story.query);
         
 
         if (this.props.story.query && this.props.story.query.length > 1) {
-            if (this.props.story.query % 2 === 0) {
-                this.props.getResults(this.props.story.query)
+            console.log("here");
+            if (this.props.story.query.length % 2 === 0) {
+                console.log("here too");
+                const myResults = this.props.story.stories.map((eachStory, index) =>
+                {
+                    if(document.getElementById('searchbar').value.length < 2)
+                    {
+                        return <tr></tr>;
+                    }
+                    else
+                    {
+                        if(eachStory.Title.toLowerCase().includes(document.getElementById('searchbar').value))
+                        {
+                            console.log('map');
+                            return(
+                                <tr>
+                                    <td>{eachStory.Title}</td>
+                                </tr>
+                            );
+                        }
+                        else
+                        {
+                            return <tr></tr>;
+                        }
+                    }
+                    
+                })
             }
         } 
     }
@@ -182,9 +207,13 @@ class Admin extends Component {
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <input type="Search" onChange={this.onSearch} className="inputBoxes" name="Search"  placeholder="Search..." />
+                                            <input type="Search" onChange={this.onSearch} id="searchbar" className="inputBoxes" name="Search"  placeholder="Search..." />
                                         </td>
                                     </tr>
+
+                                    
+                                    
+                                    
                                 </tbody>
                             </table>
                         </div>
