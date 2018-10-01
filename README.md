@@ -1,7 +1,9 @@
 <<<<<<< HEAD
-# React Express Starter Pack
+# ACEA News App
 
-> Create full stack apps with React and Express. Run your client and server with a single command. 
+> News Web App for independent journalist
+
+### Built with React Express Starter Boilerplate by Brad Traversy
 
 ### Redux Version
 This version does not include Redux
