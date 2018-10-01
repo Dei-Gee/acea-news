@@ -30,7 +30,7 @@ npm run client
 
 ## App Info
 
-### Author
+### Boilerplate Author
 
 Brad Traversy
 [Traversy Media](http://www.traversymedia.com)
@@ -43,5 +43,7 @@ Brad Traversy
 
 This project is licensed under the MIT License
 =======
-# acea-news
+# App author
+
+Deji Ojo
 >>>>>>> ccd312ebad98a2d6b4bef06f13663b4f862ab383
